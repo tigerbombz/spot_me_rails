@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spot me Login</title>
+    // <script>
+    //   $(document).ready(function(){
+    //     $('#new_reg').submit(function(){
+    //       $.post(
+    //         $(this).attr('action'),
+    //         $(this).serialize(),
+    //         function(data){
+    //           console.log('Data Received from the Ajax call', data);
+    //           //put additional codes here to update html, etc.
+    //           //for example things like
+    //           $('#message').html(data.message);
+    //         },
+    //         "json"
+    //       );
+    //       return false;
+    //     });
+    //   });
+    // </script>
+    <script>
+    $(document).ready(function() {
+      $(window).scroll(function(e){
+        parallax();
+      });
+      function parallax(){
+        var scrolled = $(window).scrollTop();
+        $('.bg').css('top',-(scrolled*0.2)+'px');
+      }
+    });
+    </script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '932775823496851',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="header_login">
+    <%= image_tag("spotme-11.png", width: '50', height:'350', class: "main_pic") %>
+    </div>
+    <div class="login_main">
+      <div class="login_row">
+        <div class="register">
+
+
+        <%= form_for @user, html:{id: :new_reg}, :url => {:controller => 'sessions', :action => "create" } do |f| %>
+          <% if flash[:answer] %>
+            <p><%= flash[:answer] %></p>
+          <% end %>
+          <h2>Sign Up Now</h2>
+
+          <p><%= f.label 'username:' %></p>
+          <%= f.text_field :username %><br>
+          <p><%= f.label 'email:' %></p>
+          <%= f.text_field :email %><br>
+          <p><%= f.label 'password:' %></p>
+          <%= f.password_field :password %><br>
+          <p><%= f.label 'password_confirmation:' %></p>
+          <%= f.password_field :password_confirmation, name: 'Password Confirmation' %><br>
+          <p><%= f.label 'Date of Birth:' %></p>
+          <%= f.date_field :dob %><br>
+          <%= submit_tag 'Join Us' %>
+        <% end %>
+      </div>
+
+      <div class="login">
+
+        <% if flash[:error]%>
+          <%= flash[:error] %>
+        <% end %>
+        <%= form_for @user, :url => { :action => "login" } do |f| %>
+        <h2>Login</h2>
+          <%= f.label 'email' %>
+          <%= f.text_field :email %><br>
+          <%= f.label 'password' %>
+          <%= f.password_field :password %><br>
+          <%= submit_tag 'Log In' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div
+      class="fb-like"
+      data-share="true"
+      data-width="450"
+      data-show-faces="true">
+    </div>
+
+  </body>
+</html>
+

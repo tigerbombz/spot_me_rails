@@ -1,0 +1,19 @@
+<div class="create_workout">
+
+<% if flash[:errors] %>
+  <%= flash[:errors] %>
+<% end %>
+<%= form_for @workout, :url => { :action => "create" } do |f| %>
+  <h1>Add Workout:</h1>
+  <%= f.label 'title' %>
+  <%= f.text_field :title %><br>
+  <%= f.label 'bio' %>
+  <%= f.text_field :bio %><br>
+  <%= f.label 'Image URL' %>
+  <%= f.text_field :url %><br>
+  <%= f.label 'content' %>
+  <%= f.text_area(:content, size: '49x10') %>
+  <%= submit_tag 'Create', class: 'create' %>
+<% end %>
+</div>
+

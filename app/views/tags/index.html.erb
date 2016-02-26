@@ -1,0 +1,62 @@
+<nav class='nav-main'>
+    <div class="logo">
+      <a href= "/users/new"><%= image_tag("spotme-06.png", width: '50', height:'45') %></a>
+    </div>
+    <ul>
+      <li>
+        <a href="#" class="nav-item">Fitness &#8964</a>
+        <div class="nav-content">
+          <div class="nav-sub">
+            <ul>
+              <li><a href="#">Men</a></li>
+              <li><a href="#">Women</a></li>
+              <li><a href="#">Strength</a></li>
+              <li><a href="#">Endurance</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="nav-item">Community &#8964</a>
+        <div class="nav-content">
+          <div class="nav-sub">
+            <ul>
+              <li><a href="#">Forums</a></li>
+              <li><a href="#">Testimonies</a></li>
+              <li><a href="#">Gallery</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+      </li>
+    </ul>
+</nav>
+
+<div class="search_tag">
+
+<h1>Search for anything</h1>
+<%= form_tag tags_path, method: :get do %>
+  <%= text_field_tag :name, "", placeholder: "What tag are you looking for?"%>
+  <%= button_tag "Search" %>
+<% end %>
+<hr>
+</div>
+
+<% @workouts.each do |w| %>
+
+    <div class="row">
+      <img src="<%= w.url %>" alt="wrist">
+        <div class="row_content">
+          <a href="/workouts/<%= w.id %>"><%=w.title%></a>
+          <h6>By <%= w.user.username %></h6>
+          <p>POSTED ON <%= w.created_at.strftime("%b/%d/%Y")%></p>
+          <p><%= w.bio%></p>
+          <p><%= w.content %></p>
+        </div>
+      </div>
+    <hr>
+
+<% end %>
+
+

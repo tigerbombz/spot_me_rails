@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spot Me</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+</head>
+<body>
+<% if current_user %>
+  <form action='/users/id' method='post'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='delete'>
+    <input type='submit' value='Log Out'>
+  </form>
+<% end %>
+<%= yield %>
+</body>
+</html>
