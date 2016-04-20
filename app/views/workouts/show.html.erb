@@ -42,6 +42,19 @@
   <p><%= @workout.content %></p>
 </div>
 
+<% @comments.each do |c| %>
+<p><%= c.comment.inspect %></p>
+<% end %>
+
+<div class="create_comment">
+  <%= form_for @comment, :url => {controller: 'comments', :action => 'create'} do |f| %>
+    <h2>Leave a Comment</h2>
+    <%= f.text_area :comment, size: '50x5' %>
+    <%= hidden_field_tag :workout_id, @workout.id %>
+    <%= submit_tag 'Post' %>
+  <% end %>
+</div>
+
 <div class="create_tag">
 <% if flash[:error] %>
   <%= flash[:error] %>

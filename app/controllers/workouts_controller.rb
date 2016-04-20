@@ -7,8 +7,10 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    # @workout = Workout.where('workout_id = ?', params[:id])
     @workout = Workout.find(params[:id])
+    @comments = Comment.where(workout_id: @workout.id)
+    @comment = Comment.new
+
     @tag = Tag.new
     name = params[:name]
     tag = Tag.find_by(name: name)
